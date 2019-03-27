@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 // These values are all hardcoded...for now!
 // Soon, we'll fetch them from the server!
@@ -8,15 +10,18 @@ const GENERAL_CHANNEL = '/channels/2';
 const DOGS_CHANNEL = '/channels/3';
 const LUNCH_CHANNEL = '/channels/4';
 
-export default class ChannelList extends Component {
+class ChannelList extends Component {
 
-  render () {
+
+  render() {
+
+    const { messages } = this.props;
     return (
       <ul>
         <li>
           <NavLink to={RANDOM_CHANNEL} activeClassName="active">
             <span># really_random</span>
-            <span className="badge">0</span>
+            <span className="badge">{messages.filter(message => message.channelId === 1).length}</span>
           </NavLink>
         </li>
         <li>
@@ -41,3 +46,16 @@ export default class ChannelList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    messages: state.messages,
+  };
+};
+
+
+export default withRouter(
+  connect(
+    mapStateToProps
+  )(ChannelList)
+);
