@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import store, { changeAuthorName } from "../store";
 
-const mapDistpatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     update: (name) => dispatch(changeAuthorName(name)),
   }
@@ -27,4 +27,4 @@ const NameEntry = (props) => {
   )
 }
 
-export default connect(null, mapDistpatchToProps)(NameEntry);
+export default connect(null, mapDispatchToProps)(NameEntry);
